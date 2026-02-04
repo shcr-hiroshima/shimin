@@ -1,220 +1,272 @@
-/**
- * Character Encoding: UTF-8
- * * GitHubでの文字化けを防ぐため、このファイルは必ず「UTF-8」形式で保存してください。
- * VS Codeの場合：右下のエンコード表示をクリック > [Save with Encoding] > [UTF-8] を選択。
- */
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>市民開発ローンチ・ロードマップ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+        }
+        .task-checked {
+            text-decoration: line-through;
+            color: #94a3b8;
+        }
+        .icon-checked {
+            color: #10b981;
+            fill: #ecfdf5;
+        }
+        .transition-all-custom {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen p-4 md:p-8">
 
-import React, { useState } from 'react';
-import { 
-  ShieldCheck, 
-  Rocket, 
-  Users, 
-  BarChart3, 
-  CheckCircle2, 
-  MessageSquare, 
-  Cpu, 
-  Calendar,
-  ChevronRight,
-  ClipboardList
-} from 'lucide-react';
-
-const RoadmapDashboard = () => {
-  const [tasks, setTasks] = useState({
-    'step1-1': false, 'step1-2': false, 'step1-3': false,
-    'step2-1': false, 'step2-2': false, 'step2-3': false,
-    'step3-1': false, 'step3-2': false, 'step3-3': false,
-    'step4-1': false, 'step4-2': false, 'step4-3': false,
-  });
-
-  const toggleTask = (id) => {
-    setTasks(prev => ({ ...prev, [id]: !prev[id] }));
-  };
-
-  const steps = [
-    {
-      id: 1,
-      title: "【STEP 1】土台作り",
-      subtitle: "ルールの整備",
-      period: "Day 1 - 7",
-      icon: <ShieldCheck className="w-6 h-6" />,
-      color: "bg-blue-500",
-      items: [
-        { id: 'step1-1', text: "ガイドラインの掲示 (資料)" },
-        { id: 'step1-2', text: "申請フローの設置 (リンク)" },
-        { id: 'step1-3', text: "判定基準の透明化 (公開)" }
-      ]
-    },
-    {
-      id: 2,
-      title: "【STEP 2】教育と起動",
-      subtitle: "スキルの平準化",
-      period: "Day 8 - 21",
-      icon: <Rocket className="w-6 h-6" />,
-      color: "bg-emerald-500",
-      items: [
-        { id: 'step2-1', text: "プロンプト術の伝授 (PTCF)" },
-        { id: 'step2-2', text: "入門課題の配信 (Gemini/AppSheet)" },
-        { id: 'step2-3', text: "UI/UX意識付け (チェックシート)" }
-      ]
-    },
-    {
-      id: 3,
-      title: "【STEP 3】活性化",
-      subtitle: "コミュニティ形成",
-      period: "Day 22 - 45",
-      icon: <Users className="w-6 h-6" />,
-      color: "bg-amber-500",
-      items: [
-        { id: 'step3-1', text: "進捗お披露目会 (ストリーム)" },
-        { id: 'step3-2', text: "相互レビュー (クエスト形式)" },
-        { id: 'step3-3', text: "ライブ解決 (Google Meet)" }
-      ]
-    },
-    {
-      id: 4,
-      title: "【STEP 4】定着と拡散",
-      subtitle: "評価とナレッジ化",
-      period: "Day 46 〜",
-      icon: <BarChart3 className="w-6 h-6" />,
-      color: "bg-indigo-500",
-      items: [
-        { id: 'step4-1', text: "認定バッジの発行" },
-        { id: 'step4-2', text: "成功事例アーカイブの整理" },
-        { id: 'step4-3', text: "社内アプリストア化" }
-      ]
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-slate-50 p-4 md:p-8 font-sans text-slate-800">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <header className="mb-10 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between border-b border-slate-200 pb-6">
-          <div>
-            <h1 className="text-3xl font-bold text-slate-900 mb-2 flex items-center gap-3">
-              <span className="bg-emerald-600 text-white p-2 rounded-lg">
-                <ClipboardList className="w-8 h-8" />
-              </span>
-              市民開発ローンチ・ロードマップ
-            </h1>
-            <p className="text-slate-500 font-medium">Google Classroom をハブとした組織的なDX推進プラン</p>
-          </div>
-          <div className="mt-4 md:mt-0 flex items-center gap-2 text-sm text-slate-500 italic">
-            <Calendar className="w-4 h-4" />
-            Last Updated: {new Date().toLocaleDateString('ja-JP')}
-          </div>
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <header class="mb-10 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between border-b border-slate-200 pb-6">
+            <div>
+                <h1 class="text-3xl font-bold text-slate-900 mb-2 flex items-center gap-3 justify-center md:justify-start">
+                    <span class="bg-emerald-600 text-white p-2 rounded-lg shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="M15 2H9a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"></path><path d="M12 11h4"></path><path d="M12 16h4"></path><path d="M8 11h.01"></path><path d="M8 16h.01"></path></svg>
+                    </span>
+                    市民開発ローンチ・ロードマップ
+                </h1>
+                <p class="text-slate-500 font-medium">Google Classroom をハブとした組織的なDX推進プラン</p>
+            </div>
+            <div class="mt-4 md:mt-0 flex items-center gap-2 text-sm text-slate-500 italic justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Last Updated: <span id="current-date"></span>
+            </div>
         </header>
 
-        {/* Timeline Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {steps.map((step, idx) => (
-            <div key={step.id} className="relative">
-              {idx < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 -right-4 z-10 transform -translate-y-1/2">
-                  <ChevronRight className="w-6 h-6 text-slate-300" />
+        <!-- Timeline Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <!-- Step 1 -->
+            <div class="relative group">
+                <div class="hidden lg:block absolute top-1/2 -right-4 z-10 transform -translate-y-1/2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
                 </div>
-              )}
-              <div className="bg-white rounded-2xl shadow-sm border border-slate-100 h-full overflow-hidden flex flex-col">
-                <div className={`${step.color} p-4 text-white`}>
-                  <div className="flex justify-between items-start mb-2">
-                    <span className="p-1.5 bg-white/20 rounded-md">
-                      {step.icon}
-                    </span>
-                    <span className="text-xs font-bold bg-white/30 px-2 py-1 rounded-full">
-                      {step.period}
-                    </span>
-                  </div>
-                  <h3 className="font-bold text-lg">{step.title}</h3>
-                  <p className="text-white/80 text-sm">{step.subtitle}</p>
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 h-full overflow-hidden flex flex-col hover:shadow-md transition-all-custom">
+                    <div class="bg-blue-500 p-4 text-white">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="p-1.5 bg-white/20 rounded-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path><path d="m9 12 2 2 4-4"></path></svg>
+                            </span>
+                            <span class="text-xs font-bold bg-white/30 px-2 py-1 rounded-full">Day 1 - 7</span>
+                        </div>
+                        <h3 class="font-bold text-lg">【STEP 1】土台作り</h3>
+                        <p class="text-white/80 text-sm">ルールの整備</p>
+                    </div>
+                    <div class="p-5 flex-grow">
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3 p-2 rounded-lg cursor-pointer hover:bg-slate-50 transition-all-custom" onclick="toggleTask(this)">
+                                <svg class="task-icon w-5 h-5 mt-0.5 shrink-0 text-slate-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+                                <span class="text-sm leading-tight font-medium">ガイドラインの掲示 (資料)</span>
+                            </li>
+                            <li class="flex items-start gap-3 p-2 rounded-lg cursor-pointer hover:bg-slate-50 transition-all-custom" onclick="toggleTask(this)">
+                                <svg class="task-icon w-5 h-5 mt-0.5 shrink-0 text-slate-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+                                <span class="text-sm leading-tight font-medium">申請フローの設置 (リンク)</span>
+                            </li>
+                            <li class="flex items-start gap-3 p-2 rounded-lg cursor-pointer hover:bg-slate-50 transition-all-custom" onclick="toggleTask(this)">
+                                <svg class="task-icon w-5 h-5 mt-0.5 shrink-0 text-slate-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+                                <span class="text-sm leading-tight font-medium">判定基準の透明化 (公開)</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                
-                <div className="p-5 flex-grow">
-                  <ul className="space-y-3">
-                    {step.items.map((item) => (
-                      <li 
-                        key={item.id}
-                        onClick={() => toggleTask(item.id)}
-                        className={`flex items-start gap-3 p-2 rounded-lg cursor-pointer transition-colors ${tasks[item.id] ? 'bg-slate-50 text-slate-400' : 'hover:bg-slate-50'}`}
-                      >
-                        <CheckCircle2 className={`w-5 h-5 mt-0.5 shrink-0 ${tasks[item.id] ? 'text-emerald-500 fill-emerald-50' : 'text-slate-200'}`} />
-                        <span className={`text-sm leading-tight ${tasks[item.id] ? 'line-through' : 'font-medium'}`}>
-                          {item.text}
+            </div>
+
+            <!-- Step 2 -->
+            <div class="relative group">
+                <div class="hidden lg:block absolute top-1/2 -right-4 z-10 transform -translate-y-1/2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 h-full overflow-hidden flex flex-col hover:shadow-md transition-all-custom">
+                    <div class="bg-emerald-500 p-4 text-white">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="p-1.5 bg-white/20 rounded-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path></svg>
+                            </span>
+                            <span class="text-xs font-bold bg-white/30 px-2 py-1 rounded-full">Day 8 - 21</span>
+                        </div>
+                        <h3 class="font-bold text-lg">【STEP 2】教育と起動</h3>
+                        <p class="text-white/80 text-sm">スキルの平準化</p>
+                    </div>
+                    <div class="p-5 flex-grow">
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3 p-2 rounded-lg cursor-pointer hover:bg-slate-50 transition-all-custom" onclick="toggleTask(this)">
+                                <svg class="task-icon w-5 h-5 mt-0.5 shrink-0 text-slate-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+                                <span class="text-sm leading-tight font-medium">プロンプト術の伝授 (PTCF)</span>
+                            </li>
+                            <li class="flex items-start gap-3 p-2 rounded-lg cursor-pointer hover:bg-slate-50 transition-all-custom" onclick="toggleTask(this)">
+                                <svg class="task-icon w-5 h-5 mt-0.5 shrink-0 text-slate-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+                                <span class="text-sm leading-tight font-medium">入門課題の配信 (Gemini/AppSheet)</span>
+                            </li>
+                            <li class="flex items-start gap-3 p-2 rounded-lg cursor-pointer hover:bg-slate-50 transition-all-custom" onclick="toggleTask(this)">
+                                <svg class="task-icon w-5 h-5 mt-0.5 shrink-0 text-slate-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+                                <span class="text-sm leading-tight font-medium">UI/UX意識付け (チェックシート)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="relative group">
+                <div class="hidden lg:block absolute top-1/2 -right-4 z-10 transform -translate-y-1/2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 h-full overflow-hidden flex flex-col hover:shadow-md transition-all-custom">
+                    <div class="bg-amber-500 p-4 text-white">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="p-1.5 bg-white/20 rounded-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </span>
+                            <span class="text-xs font-bold bg-white/30 px-2 py-1 rounded-full">Day 22 - 45</span>
+                        </div>
+                        <h3 class="font-bold text-lg">【STEP 3】活性化</h3>
+                        <p class="text-white/80 text-sm">コミュニティ形成</p>
+                    </div>
+                    <div class="p-5 flex-grow">
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3 p-2 rounded-lg cursor-pointer hover:bg-slate-50 transition-all-custom" onclick="toggleTask(this)">
+                                <svg class="task-icon w-5 h-5 mt-0.5 shrink-0 text-slate-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+                                <span class="text-sm leading-tight font-medium">進捗お披露目会 (ストリーム)</span>
+                            </li>
+                            <li class="flex items-start gap-3 p-2 rounded-lg cursor-pointer hover:bg-slate-50 transition-all-custom" onclick="toggleTask(this)">
+                                <svg class="task-icon w-5 h-5 mt-0.5 shrink-0 text-slate-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+                                <span class="text-sm leading-tight font-medium">相互レビュー (クエスト形式)</span>
+                            </li>
+                            <li class="flex items-start gap-3 p-2 rounded-lg cursor-pointer hover:bg-slate-50 transition-all-custom" onclick="toggleTask(this)">
+                                <svg class="task-icon w-5 h-5 mt-0.5 shrink-0 text-slate-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+                                <span class="text-sm leading-tight font-medium">ライブ解決 (Google Meet)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 h-full overflow-hidden flex flex-col hover:shadow-md transition-all-custom">
+                <div class="bg-indigo-500 p-4 text-white">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="p-1.5 bg-white/20 rounded-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"></line><line x1="18" y1="20" x2="18" y2="4"></line><line x1="6" y1="20" x2="6" y2="16"></line></svg>
                         </span>
-                      </li>
-                    ))}
-                  </ul>
+                        <span class="text-xs font-bold bg-white/30 px-2 py-1 rounded-full">Day 46 〜</span>
+                    </div>
+                    <h3 class="font-bold text-lg">【STEP 4】定着と拡散</h3>
+                    <p class="text-white/80 text-sm">評価とナレッジ化</p>
                 </div>
-              </div>
+                <div class="p-5 flex-grow">
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 p-2 rounded-lg cursor-pointer hover:bg-slate-50 transition-all-custom" onclick="toggleTask(this)">
+                            <svg class="task-icon w-5 h-5 mt-0.5 shrink-0 text-slate-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span class="text-sm leading-tight font-medium">認定バッジの発行</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-2 rounded-lg cursor-pointer hover:bg-slate-50 transition-all-custom" onclick="toggleTask(this)">
+                            <svg class="task-icon w-5 h-5 mt-0.5 shrink-0 text-slate-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span class="text-sm leading-tight font-medium">成功事例アーカイブの整理</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-2 rounded-lg cursor-pointer hover:bg-slate-50 transition-all-custom" onclick="toggleTask(this)">
+                            <svg class="task-icon w-5 h-5 mt-0.5 shrink-0 text-slate-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+                            <span class="text-sm leading-tight font-medium">社内アプリストア化</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-          ))}
         </div>
 
-        {/* Success Points Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-blue-900 rounded-3xl p-8 text-white shadow-xl relative overflow-hidden">
-            <div className="relative z-10">
-              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                <MessageSquare className="w-6 h-6 text-blue-300" />
-                IT部門は「伴走者（コーチ）」
-              </h2>
-              <div className="space-y-4 text-blue-100">
-                <p className="leading-relaxed">
-                  厳しすぎる「検閲」は開発の芽を摘みます。Classroom上では、安全に走るためのコーチングを行いましょう。
-                </p>
-                <div className="flex gap-4 mt-6">
-                  <div className="bg-blue-800/50 p-4 rounded-xl flex-1 text-center">
-                    <div className="text-blue-300 text-xs font-bold uppercase mb-1">Old IT</div>
-                    <div className="font-bold">許可・禁止</div>
-                  </div>
-                  <div className="bg-emerald-500/30 p-4 rounded-xl flex-1 text-center border border-emerald-500/50">
-                    <div className="text-emerald-300 text-xs font-bold uppercase mb-1">Modern IT</div>
-                    <div className="font-bold">支援・共創</div>
-                  </div>
+        <!-- Success Points Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- IT Coach Section -->
+            <div class="bg-blue-900 rounded-3xl p-8 text-white shadow-xl relative overflow-hidden group">
+                <div class="relative z-10">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="text-blue-300" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                        IT部門は「伴走者（コーチ）」
+                    </h2>
+                    <div class="space-y-4 text-blue-100">
+                        <p class="leading-relaxed">
+                            厳しすぎる「検閲」は開発の芽を摘みます。Classroom上では、安全に走るためのコーチングを行いましょう。
+                        </p>
+                        <div class="flex gap-4 mt-6">
+                            <div class="bg-blue-800/50 p-4 rounded-xl flex-1 text-center border border-transparent hover:border-blue-400 transition-all-custom">
+                                <div class="text-blue-300 text-xs font-bold uppercase mb-1">Old IT</div>
+                                <div class="font-bold">許可・禁止</div>
+                            </div>
+                            <div class="bg-emerald-500/30 p-4 rounded-xl flex-1 text-center border border-emerald-500/50">
+                                <div class="text-emerald-300 text-xs font-bold uppercase mb-1">Modern IT</div>
+                                <div class="font-bold">支援・共創</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition-transform duration-500"></div>
             </div>
-            {/* Background pattern */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16"></div>
-          </div>
 
-          <div className="bg-indigo-900 rounded-3xl p-8 text-white shadow-xl relative overflow-hidden">
-            <div className="relative z-10">
-              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                <Cpu className="w-6 h-6 text-indigo-300" />
-                Gemini をフル活用する
-              </h2>
-              <div className="space-y-4 text-indigo-100">
-                <p className="leading-relaxed">
-                  「まずはGeminiに聞いてみよう」を合言葉に。企画・開発・デバッグ全ての工程でAIを相棒にすることで、開発速度は劇的に向上します。
-                </p>
-                <ul className="grid grid-cols-2 gap-3 mt-4">
-                  <li className="flex items-center gap-2 text-sm bg-indigo-800/40 p-2 rounded-lg">
-                    <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full"></span> 企画の壁打ち
-                  </li>
-                  <li className="flex items-center gap-2 text-sm bg-indigo-800/40 p-2 rounded-lg">
-                    <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full"></span> 数式の自動生成
-                  </li>
-                  <li className="flex items-center gap-2 text-sm bg-indigo-800/40 p-2 rounded-lg">
-                    <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full"></span> エラーの解消
-                  </li>
-                  <li className="flex items-center gap-2 text-sm bg-indigo-800/40 p-2 rounded-lg">
-                    <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full"></span> UI改善アドバイス
-                  </li>
-                </ul>
-              </div>
+            <!-- Gemini Section -->
+            <div class="bg-indigo-900 rounded-3xl p-8 text-white shadow-xl relative overflow-hidden group">
+                <div class="relative z-10">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="text-indigo-300" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M9 3v18"></path><path d="M15 3v18"></path><path d="M3 9h18"></path><path d="M3 15h18"></path></svg>
+                        Gemini をフル活用する
+                    </h2>
+                    <div class="space-y-4 text-indigo-100">
+                        <p class="leading-relaxed">
+                            「まずはGeminiに聞いてみよう」を合言葉に。企画・開発・デバッグ全ての工程でAIを相棒にすることで、開発速度は劇的に向上します。
+                        </p>
+                        <ul class="grid grid-cols-2 gap-3 mt-4">
+                            <li class="flex items-center gap-2 text-sm bg-indigo-800/40 p-2 rounded-lg border border-indigo-700/50">
+                                <span class="w-1.5 h-1.5 bg-indigo-400 rounded-full"></span> 企画の壁打ち
+                            </li>
+                            <li class="flex items-center gap-2 text-sm bg-indigo-800/40 p-2 rounded-lg border border-indigo-700/50">
+                                <span class="w-1.5 h-1.5 bg-indigo-400 rounded-full"></span> 数式の自動生成
+                            </li>
+                            <li class="flex items-center gap-2 text-sm bg-indigo-800/40 p-2 rounded-lg border border-indigo-700/50">
+                                <span class="w-1.5 h-1.5 bg-indigo-400 rounded-full"></span> エラーの解消
+                            </li>
+                            <li class="flex items-center gap-2 text-sm bg-indigo-800/40 p-2 rounded-lg border border-indigo-700/50">
+                                <span class="w-1.5 h-1.5 bg-indigo-400 rounded-full"></span> UI改善アドバイス
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full -ml-24 -mb-24 group-hover:scale-110 transition-transform duration-500"></div>
             </div>
-            {/* Background pattern */}
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full -ml-24 -mb-24"></div>
-          </div>
         </div>
 
-        {/* Footer info */}
-        <footer className="mt-12 text-center text-slate-400 text-sm">
-          <p>© 2024 Citizen Development Initiative. Supported by Gemini AI & Google Classroom.</p>
+        <!-- Footer -->
+        <footer class="mt-12 text-center text-slate-400 text-sm">
+            <p>© 2024 Citizen Development Initiative. Supported by Gemini AI & Google Classroom.</p>
         </footer>
-      </div>
     </div>
-  );
-};
 
-export default App = RoadmapDashboard;
+    <script>
+        // Set current date
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('ja-JP');
+
+        // Toggle task function
+        function toggleTask(element) {
+            const icon = element.querySelector('.task-icon');
+            const text = element.querySelector('span');
+            
+            if (text.classList.contains('task-checked')) {
+                text.classList.remove('task-checked');
+                text.classList.add('font-medium');
+                icon.classList.remove('icon-checked');
+                icon.classList.add('text-slate-200');
+            } else {
+                text.classList.add('task-checked');
+                text.classList.remove('font-medium');
+                icon.classList.add('icon-checked');
+                icon.classList.remove('text-slate-200');
+            }
+        }
+    </script>
+</body>
+</html>
