@@ -1,0 +1,214 @@
+import React, { useState } from 'react';
+import { 
+  ShieldCheck, 
+  Rocket, 
+  Users, 
+  BarChart3, 
+  CheckCircle2, 
+  MessageSquare, 
+  Cpu, 
+  Calendar,
+  ChevronRight,
+  ClipboardList
+} from 'lucide-react';
+
+const RoadmapDashboard = () => {
+  const [tasks, setTasks] = useState({
+    'step1-1': false, 'step1-2': false, 'step1-3': false,
+    'step2-1': false, 'step2-2': false, 'step2-3': false,
+    'step3-1': false, 'step3-2': false, 'step3-3': false,
+    'step4-1': false, 'step4-2': false, 'step4-3': false,
+  });
+
+  const toggleTask = (id) => {
+    setTasks(prev => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const steps = [
+    {
+      id: 1,
+      title: "【STEP 1】土台作り",
+      subtitle: "ルールの整備",
+      period: "Day 1 - 7",
+      icon: <ShieldCheck className="w-6 h-6" />,
+      color: "bg-blue-500",
+      items: [
+        { id: 'step1-1', text: "ガイドラインの掲示 (資料)" },
+        { id: 'step1-2', text: "申請フローの設置 (リンク)" },
+        { id: 'step1-3', text: "判定基準の透明化 (公開)" }
+      ]
+    },
+    {
+      id: 2,
+      title: "【STEP 2】教育と起動",
+      subtitle: "スキルの平準化",
+      period: "Day 8 - 21",
+      icon: <Rocket className="w-6 h-6" />,
+      color: "bg-emerald-500",
+      items: [
+        { id: 'step2-1', text: "プロンプト術の伝授 (PTCF)" },
+        { id: 'step2-2', text: "入門課題の配信 (Gemini/AppSheet)" },
+        { id: 'step2-3', text: "UI/UX意識付け (チェックシート)" }
+      ]
+    },
+    {
+      id: 3,
+      title: "【STEP 3】活性化",
+      subtitle: "コミュニティ形成",
+      period: "Day 22 - 45",
+      icon: <Users className="w-6 h-6" />,
+      color: "bg-amber-500",
+      items: [
+        { id: 'step3-1', text: "進捗お披露目会 (ストリーム)" },
+        { id: 'step3-2', text: "相互レビュー (クエスト形式)" },
+        { id: 'step3-3', text: "ライブ解決 (Google Meet)" }
+      ]
+    },
+    {
+      id: 4,
+      title: "【STEP 4】定着と拡散",
+      subtitle: "評価とナレッジ化",
+      period: "Day 46 〜",
+      icon: <BarChart3 className="w-6 h-6" />,
+      color: "bg-indigo-500",
+      items: [
+        { id: 'step4-1', text: "認定バッジの発行" },
+        { id: 'step4-2', text: "成功事例アーカイブの整理" },
+        { id: 'step4-3', text: "社内アプリストア化" }
+      ]
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-slate-50 p-4 md:p-8 font-sans text-slate-800">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <header className="mb-10 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between border-b border-slate-200 pb-6">
+          <div>
+            <h1 className="text-3xl font-bold text-slate-900 mb-2 flex items-center gap-3">
+              <span className="bg-emerald-600 text-white p-2 rounded-lg">
+                <ClipboardList className="w-8 h-8" />
+              </span>
+              市民開発ローンチ・ロードマップ
+            </h1>
+            <p className="text-slate-500 font-medium">Google Classroom をハブとした組織的なDX推進プラン</p>
+          </div>
+          <div className="mt-4 md:mt-0 flex items-center gap-2 text-sm text-slate-500 italic">
+            <Calendar className="w-4 h-4" />
+            Last Updated: {new Date().toLocaleDateString('ja-JP')}
+          </div>
+        </header>
+
+        {/* Timeline Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          {steps.map((step, idx) => (
+            <div key={step.id} className="relative">
+              {idx < steps.length - 1 && (
+                <div className="hidden lg:block absolute top-1/2 -right-4 z-10 transform -translate-y-1/2">
+                  <ChevronRight className="w-6 h-6 text-slate-300" />
+                </div>
+              )}
+              <div className="bg-white rounded-2xl shadow-sm border border-slate-100 h-full overflow-hidden flex flex-col">
+                <div className={`${step.color} p-4 text-white`}>
+                  <div className="flex justify-between items-start mb-2">
+                    <span className="p-1.5 bg-white/20 rounded-md">
+                      {step.icon}
+                    </span>
+                    <span className="text-xs font-bold bg-white/30 px-2 py-1 rounded-full">
+                      {step.period}
+                    </span>
+                  </div>
+                  <h3 className="font-bold text-lg">{step.title}</h3>
+                  <p className="text-white/80 text-sm">{step.subtitle}</p>
+                </div>
+                
+                <div className="p-5 flex-grow">
+                  <ul className="space-y-3">
+                    {step.items.map((item) => (
+                      <li 
+                        key={item.id}
+                        onClick={() => toggleTask(item.id)}
+                        className={`flex items-start gap-3 p-2 rounded-lg cursor-pointer transition-colors ${tasks[item.id] ? 'bg-slate-50 text-slate-400' : 'hover:bg-slate-50'}`}
+                      >
+                        <CheckCircle2 className={`w-5 h-5 mt-0.5 shrink-0 ${tasks[item.id] ? 'text-emerald-500 fill-emerald-50' : 'text-slate-200'}`} />
+                        <span className={`text-sm leading-tight ${tasks[item.id] ? 'line-through' : 'font-medium'}`}>
+                          {item.text}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Success Points Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="bg-blue-900 rounded-3xl p-8 text-white shadow-xl relative overflow-hidden">
+            <div className="relative z-10">
+              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                <MessageSquare className="w-6 h-6 text-blue-300" />
+                IT部門は「伴走者（コーチ）」
+              </h2>
+              <div className="space-y-4 text-blue-100">
+                <p className="leading-relaxed">
+                  厳しすぎる「検閲」は開発の芽を摘みます。Classroom上では、安全に走るためのコーチングを行いましょう。
+                </p>
+                <div className="flex gap-4 mt-6">
+                  <div className="bg-blue-800/50 p-4 rounded-xl flex-1 text-center">
+                    <div className="text-blue-300 text-xs font-bold uppercase mb-1">Old IT</div>
+                    <div className="font-bold">許可・禁止</div>
+                  </div>
+                  <div className="bg-emerald-500/30 p-4 rounded-xl flex-1 text-center border border-emerald-500/50">
+                    <div className="text-emerald-300 text-xs font-bold uppercase mb-1">Modern IT</div>
+                    <div className="font-bold">支援・共創</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* Background pattern */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16"></div>
+          </div>
+
+          <div className="bg-indigo-900 rounded-3xl p-8 text-white shadow-xl relative overflow-hidden">
+            <div className="relative z-10">
+              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                <Cpu className="w-6 h-6 text-indigo-300" />
+                Gemini をフル活用する
+              </h2>
+              <div className="space-y-4 text-indigo-100">
+                <p className="leading-relaxed">
+                  「まずはGeminiに聞いてみよう」を合言葉に。企画・開発・デバッグ全ての工程でAIを相棒にすることで、開発速度は劇的に向上します。
+                </p>
+                <ul className="grid grid-cols-2 gap-3 mt-4">
+                  <li className="flex items-center gap-2 text-sm bg-indigo-800/40 p-2 rounded-lg">
+                    <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full"></span> 企画の壁打ち
+                  </li>
+                  <li className="flex items-center gap-2 text-sm bg-indigo-800/40 p-2 rounded-lg">
+                    <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full"></span> 数式の自動生成
+                  </li>
+                  <li className="flex items-center gap-2 text-sm bg-indigo-800/40 p-2 rounded-lg">
+                    <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full"></span> エラーの解消
+                  </li>
+                  <li className="flex items-center gap-2 text-sm bg-indigo-800/40 p-2 rounded-lg">
+                    <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full"></span> UI改善アドバイス
+                  </li>
+                </ul>
+              </div>
+            </div>
+            {/* Background pattern */}
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full -ml-24 -mb-24"></div>
+          </div>
+        </div>
+
+        {/* Footer info */}
+        <footer className="mt-12 text-center text-slate-400 text-sm">
+          <p>© 2024 Citizen Development Initiative. Supported by Gemini AI & Google Classroom.</p>
+        </footer>
+      </div>
+    </div>
+  );
+};
+
+export default App = RoadmapDashboard;
